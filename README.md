@@ -1,5 +1,5 @@
 # Understanding Generative AI
-# Author: Mohammd Zaman
+Author: Mohammd Zaman
 
 There are couple of ways how to feed users data to existing LLMs Models. 
 
