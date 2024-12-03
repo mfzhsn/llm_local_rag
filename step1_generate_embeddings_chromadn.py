@@ -27,7 +27,7 @@ def generate_embeddings(text):
         return None
 
 if __name__ == "__main__":
-    text_input = "mohammad"
+    text_input = "Hello, World...!!!"
     
     # Generate embeddings only once
     embeddings = generate_embeddings(text_input)
