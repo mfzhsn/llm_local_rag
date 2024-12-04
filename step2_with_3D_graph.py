@@ -48,15 +48,20 @@ def plot_embeddings_3d_customized(embeddings, labels, question_index):
         fig = plt.figure(figsize=(14, 10))
         ax = fig.add_subplot(111, projection='3d')
 
+        # Customize axis colors using tick label styles
+        ax.set_xlabel("X-Axis", fontsize=12, labelpad=10)
+        ax.set_ylabel("Y-Axis", fontsize=12, labelpad=10)
+        ax.set_zlabel("Z-Axis", fontsize=12, labelpad=10)
+
+        ax.tick_params(axis='x', colors='blue')  # X-axis tick color
+        ax.tick_params(axis='y', colors='green')  # Y-axis tick color
+        ax.tick_params(axis='z', colors='red')  # Z-axis tick color
+
         for i, label in enumerate(labels):
             x, y, z = reduced_embeddings[i]
             marker = 'o' if i != question_index else '^'  # Different marker for question
             color = 'blue' if i != question_index else 'red'  # Highlight question in red
             ax.scatter(x, y, z, label=label, s=100, marker=marker, color=color)
-
-            # Annotate distances (skip the question point)
-            if i != question_index:
-                ax.text(x, y, z + 0.2, f"{distances[i]:.2f}", fontsize=9, color='green', ha='center')
 
         # Prepare left-aligned text for distances
         distance_text = "\n".join(
@@ -66,14 +71,10 @@ def plot_embeddings_3d_customized(embeddings, labels, question_index):
         # Add main title
         ax.set_title("Embeddings in 3D with Distances from Question", fontsize=14, pad=20)
 
-        # Add left-aligned text at the top of the figure
+        # Add left-aligned text at the side of the figure
         fig.text(
             0.01, 0.95, distance_text, fontsize=10, ha='left', va='top', family="monospace"
         )
-
-        ax.set_xlabel("Principal Component 1")
-        ax.set_ylabel("Principal Component 2")
-        ax.set_zlabel("Principal Component 3")
 
         # Adjust layout and save
         plt.tight_layout()
@@ -81,8 +82,6 @@ def plot_embeddings_3d_customized(embeddings, labels, question_index):
         print("3D plot with left-aligned distances saved as 'embeddings_3d_with_distances.png'.")
     except Exception as e:
         print(f"Error in plotting 3D embeddings with customization: {e}")
-
-
 
         
 # Main script
